@@ -19,13 +19,7 @@ public:
             size++;
             p=p->next;
         }
-        int temp=0;
-        if(size%2==0)
-        {
-            temp=size/2;
-        }
-        else
-            temp=size/2;
+        int temp=size/2;
         while(temp!=0)
         {
             head=head->next;
