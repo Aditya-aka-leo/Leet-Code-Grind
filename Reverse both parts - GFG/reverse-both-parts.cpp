@@ -70,42 +70,39 @@ public:
    
     Node *reverse(Node *head, int k)
     {
-        int sz=0;
-        Node *temp=head;
-        while(temp!=NULL)
-        {
-            sz++;
-            temp=temp->next;
-        }
         Node *fs=head;
         Node *p=NULL;
         Node *r=NULL;
         Node *t=head;
         int count=0;
-        while(count<k)
+        while(t!=NULL)
         {
+            if(count<k)
+            {
             r=p;
             p=t;
             t=t->next;
             p->next=r;
             count++;
-        }
-        head=p;
-        p=NULL;
-        r=NULL;
-        count=0;
-
-        while(count<sz-k)
-        {
+            }
+            if(count==k)
+            {
+            head=p;
+            p=NULL;
+            r=NULL;
+            count++;  
+            }
+            if(count>k)
+            {
             r=p;
             p=t;
             t=t->next;
             p->next=r;
             count++;
+            }
         }
         fs->next=p;
         return head;
-        
         
         
     }
