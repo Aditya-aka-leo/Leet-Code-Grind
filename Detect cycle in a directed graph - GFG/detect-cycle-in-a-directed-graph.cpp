@@ -5,38 +5,37 @@ using namespace std;
 // } Driver Code Ends
 class Solution {
   public:
-  bool dfs(int start , vector<int> &visited , vector<int>& path_visited ,vector<int> adj[] )
-  {
-      visited[start]=1;
-      path_visited[start]=1;
-      
-      for(auto i : adj[start])
-      {
-          if(!visited[i])
-          {
-              if(dfs(i,visited,path_visited,adj) ==true)
-             return true;
-          }
-          else
-          {
-              if(path_visited[i])
-              return true;
-          }
-      }
-      
-      
-      path_visited[start]=0;
-      return false;
-  }
     // Function to detect cycle in a directed graph.
+    bool dfs(int source ,vector<bool> &vis , vector<bool> &path_vis , vector<int> adj[])
+    {
+        vis[source] = 1;
+        path_vis[source]=1;
+        for(auto i : adj[source])
+        {
+            if(!vis[i])
+            {
+                if(dfs(i,vis,path_vis,adj))
+                return true;
+            }
+            else if (path_vis[i])
+            return true;
+            
+        }
+        path_vis[source]=0;
+        return false;
+        
+    }
     bool isCyclic(int V, vector<int> adj[]) {
         // code here
-        vector<int> visited(V,0);
-        vector<int> path_visited(V,0);
-        for(int i =0 ;i<V;i++)
+        vector<bool> vis (V,0);
+        vector<bool> path_vis(V,0);
+        for(int i = 0; i < V ; i++)
         {
-            if(!visited[i] && dfs(i,visited,path_visited,adj) == true)
-            return true;
+            if(!vis[i])
+            {
+                if(dfs(i,vis,path_vis,adj))
+                return true;
+            }
         }
         return false;
     }
